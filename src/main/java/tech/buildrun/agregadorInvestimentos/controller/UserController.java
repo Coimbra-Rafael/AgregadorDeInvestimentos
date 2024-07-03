@@ -1,22 +1,29 @@
 package tech.buildrun.agregadorInvestimentos.controller;
 
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.buildrun.agregadorInvestimentos.dtos.user.CreateUserDto;
+import tech.buildrun.agregadorInvestimentos.dtos.user.UpdateUserDto;
 import tech.buildrun.agregadorInvestimentos.entity.User;
 import tech.buildrun.agregadorInvestimentos.service.UserService;
 
 import java.net.URI;
 import java.util.List;
 
+@Getter
 @RestController
 @RequestMapping("/v1/users")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody CreateUserDto createUserDto) {
         var userId = this.userService.createUser(createUserDto);
@@ -24,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> findUser(@PathVariable("userId") String userId){
+    public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
         var user = this.userService.getUserById(userId);
 
         if(user.isPresent()) {

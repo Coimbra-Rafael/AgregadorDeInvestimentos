@@ -1,14 +1,18 @@
 package tech.buildrun.agregadorInvestimentos.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "tb_user")
+@Table(name = "tb_users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,9 +27,13 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public User() {
+    @CreationTimestamp
+    private Instant creationTimestamp;
 
-    }
+    @UpdateTimestamp
+    private Instant updateTimestamp;
+
+    public User() {}
 
     public User(UUID userId, String username, String email, String password, Instant creationTimestamp, Instant updateTimestamp) {
         this.userId = userId;
@@ -35,58 +43,4 @@ public class User {
         this.creationTimestamp = creationTimestamp;
         this.updateTimestamp = updateTimestamp;
     }
-
-    public UUID getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UUID userId) {
-        this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Instant getCreationTimestamp() {
-        return creationTimestamp;
-    }
-
-    public void setCreationTimestamp(Instant creationTimestamp) {
-        this.creationTimestamp = creationTimestamp;
-    }
-
-    public Instant getUpdateTimestamp() {
-        return updateTimestamp;
-    }
-
-    public void setUpdateTimestamp(Instant updateTimestamp) {
-        this.updateTimestamp = updateTimestamp;
-    }
-
-    @CreationTimestamp
-    private Instant creationTimestamp;
-
-    @UpdateTimestamp
-    private Instant updateTimestamp;
 }
