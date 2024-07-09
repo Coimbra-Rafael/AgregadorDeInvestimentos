@@ -48,7 +48,7 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public void deleteUserId(String userId){
+    public void deleteUserById(String userId){
         var id =  UUID.fromString(userId);
         var userExist = this.userRepository.existsById(id);
         if(userExist){
