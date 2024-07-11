@@ -6,15 +6,20 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "tb_users")
-public class User {
+public class User  {
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID userId;
 
@@ -32,6 +37,9 @@ public class User {
 
     @UpdateTimestamp
     private Instant updateTimestamp;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Account> accounts;
 
     public User() {}
 

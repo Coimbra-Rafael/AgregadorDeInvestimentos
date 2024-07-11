@@ -1,14 +1,15 @@
 services:
   mysql:
     image: mysql
-    ports:
-      - "4406:3306"
-    expose:
-      - "3306"
+    container_name: MysqlBuildAndRun
     environment:
-      - MYSQL_USER=root
+      - MYSQL_USER=rafael
       - MYSQL_PASSWORD=1qazzaq1
       - MYSQL_DATABASE=db_example
       - MYSQL_ROOT_PASSWORD=1qazzaq1
+    ports:
+      - "4406:3306"
+    expose:
+      - "4406"
     volumes:
       - "./conf.d:/etc/mysql/conf.d:ro"
