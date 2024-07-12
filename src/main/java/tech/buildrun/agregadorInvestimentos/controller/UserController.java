@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.buildrun.agregadorInvestimentos.dtos.account.AccountResponseDto;
+import tech.buildrun.agregadorInvestimentos.dtos.account.CreateAccountDto;
 import tech.buildrun.agregadorInvestimentos.dtos.user.CreateUserDto;
 import tech.buildrun.agregadorInvestimentos.dtos.user.UpdateUserDto;
 import tech.buildrun.agregadorInvestimentos.entity.User;
@@ -61,5 +63,19 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    
+    @PostMapping("/{userId}/accounts")
+    public ResponseEntity<Void> updateUserById(@PathVariable("userId") String userId, @RequestBody CreateAccountDto createAccountDto) {
+
+        this.userService.createAccount(userId, createAccountDto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{userId}/accounts")
+    public ResponseEntity<List<AccountResponseDto>> updateUserById(@PathVariable("userId") String userId) {
+
+        var account =  this.userService.listAccounts(userId);
+
+        return ResponseEntity.ok(account);
+    }
+
 }

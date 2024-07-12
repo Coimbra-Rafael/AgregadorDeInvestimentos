@@ -1,7 +1,11 @@
 package tech.buildrun.agregadorInvestimentos.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "tb_accounts_stocks")
 public class AccountStock {
@@ -24,6 +28,7 @@ public class AccountStock {
     private Integer quantity;
 
     public AccountStock() {}
+
 
     public AccountStock(AccountStockId accountStockId, Account account, Stock stock, Integer quantity) {
         this.accountStockId = accountStockId;
